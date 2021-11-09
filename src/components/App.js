@@ -2,7 +2,7 @@ import React, {useEffect} from "react"
 import {connect} from "react-redux"
 
 import './App.css'
-import BasicTabs from "./tabs/Tabs"
+import BasicTabs from "./tabs/BasicTabs"
 import {initiateCharactersList, initiateEpisodesList} from "../actions/actions";
 import {charactersAPI, episodesAPI} from "../requests/requests";
 
@@ -12,13 +12,13 @@ function App({dispatch}) {
     fetch(charactersAPI)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
+          // console.log(res)
           dispatch(initiateCharactersList(res))
         });
     fetch(episodesAPI)
         .then(res => res.json())
         .then(res => {
-          console.log(res)
+          // console.log(res)
           dispatch(initiateEpisodesList(res))
         });
 
