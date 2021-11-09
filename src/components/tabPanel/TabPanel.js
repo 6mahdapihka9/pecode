@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import BasicCard from "../basicCard/BasicCard";
 
 function TabPanel({ value, index, dispatch, content, contentType }) {
-  console.log(content.results);
+  console.log(content);
   if (!content.results)
     return null;
 
@@ -16,6 +16,7 @@ function TabPanel({ value, index, dispatch, content, contentType }) {
                 <BasicCard key={res.id} data={res} type={contentType}/>
             )
           }
+
         </Box>
       </div>
   );

@@ -16,7 +16,7 @@ function App({dispatch}) {
         .then(res => res.json())
         .then(res => dispatch(initiateEpisodesList(res)));
 
-  },[])
+  })
 
   return (
     <div className="App">

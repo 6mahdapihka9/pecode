@@ -4,13 +4,15 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import {useEffect, useState} from "react";
 import {generateRandomID} from "../../helpers/generate.random.id";
+import {episodesAPI} from "../../requests/requests";
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  minWidth: 300,
+  maxWidth: 500,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -27,11 +29,8 @@ export default function BasicModal({data, open, onClose}) {
 
   useEffect(()=>{
 
-    fetch(`https://rickandmortyapi.com/api/episode/${
-      data.episode.map(eps => eps.split('/')[eps.split('/').length-1]).join(',')
-    }`)
+    fetch(episodesAPI + data.episode.map(eps => eps.split('/')[eps.split('/').length-1]).join(','))
         .then(res => res.json())
-        // .then(res => console.log(res))
         .then(res => {
           if (Array.isArray(res))
             setList([...res])
@@ -40,7 +39,7 @@ export default function BasicModal({data, open, onClose}) {
         })
 
     return setList([])
-  },[open])
+  },[data.episode, open])
 
   return (
       <div>
@@ -63,6 +62,8 @@ export default function BasicModal({data, open, onClose}) {
               Status: {data.status}
               <br/>
               Location: {data.location.name}
+              <br/>
+              Type: {data.type || 'None'}
               <br/>
               Origin: {data.origin.name}
               <br/>
