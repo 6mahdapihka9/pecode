@@ -1,19 +1,20 @@
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {connect} from "react-redux";
+import BasicCard from "../basicCard/BasicCard";
 
-function TabPanel({ children, value, index, dispatch, content, contentType}) {
-  console.log(content)
+function TabPanel({ value, index, dispatch, content, contentType }) {
+  console.log(content.results);
   if (!content.results)
     return null;
 
   return (
       <div hidden={value !== index}>
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3, display: "flex", flexFlow: 'wrap' }}>
           {
-            content.results.map(res => (contentType === 'characters')?
-                <div key={res.id}>{res.name}</div> :
-                <div key={res.id}>{res.name}</div>)
+            content.results.map(res =>
+                <BasicCard key={res.id} data={res} type={contentType}/>
+            )
           }
         </Box>
       </div>
