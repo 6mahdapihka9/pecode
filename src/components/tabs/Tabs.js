@@ -25,8 +25,8 @@ export default function BasicTabs() {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
+            <Tab label="Characters" />
+            <Tab label="Episodes" />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
