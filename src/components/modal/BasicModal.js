@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import {useEffect, useState} from "react";
+import {generateRandomID} from "../../helpers/generate.random.id";
 
 const style = {
   position: 'absolute',
@@ -16,27 +17,66 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({data}) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const style1 = {
+  maxHeight: 300,
+  overflowY: 'auto'
+}
+
+export default function BasicModal({data, open, onClose}) {
+  let [listOfEpisodes, setList] = useState([])
+
+  useEffect(()=>{
+
+    fetch(`https://rickandmortyapi.com/api/episode/${
+      data.episode.map(eps => eps.split('/')[eps.split('/').length-1]).join(',')
+    }`)
+        .then(res => res.json())
+        // .then(res => console.log(res))
+        .then(res => {
+          if (Array.isArray(res))
+            setList([...res])
+          else
+            setList([res])
+        })
+
+    return setList([])
+  },[open])
 
   return (
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
         <Modal
             open={open}
-            onClose={handleClose}
+            onClose={onClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
+            <Typography id="modal-modal-title" variant="h3" component="h2">
+              {data.name}
             </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <Typography sx={{mb: 1.5}} color="text.secondary">
+              Gender: {data.gender}
             </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }} variant="body2">
+              Species: {data.species}
+              <br/>
+              Status: {data.status}
+              <br/>
+              Location: {data.location.name}
+              <br/>
+              Origin: {data.origin.name}
+              <br/>
+              Created: {(new Date(data.created)).toLocaleDateString()}
+            </Typography>
+            <Box id="modal-modal-description" sx={{ mt: 2, ...style1}} variant="body2">
+              Episodes: {listOfEpisodes.length}
+              <br/>
+              <ul>
+              {
+                listOfEpisodes.map(eps => <li key={generateRandomID(10)}>[{eps.episode}] {eps.name}</li>)
+              }
+              </ul>
+            </Box>
           </Box>
         </Modal>
       </div>

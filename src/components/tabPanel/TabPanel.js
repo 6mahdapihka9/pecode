@@ -10,7 +10,7 @@ function TabPanel({ value, index, dispatch, content, contentType }) {
 
   return (
       <div hidden={value !== index}>
-        <Box sx={{ p: 3, display: "flex", flexFlow: 'wrap' }}>
+        <Box sx={{ p: 3, display: "flex", flexFlow: 'wrap', justifyContent: 'space-around' }}>
           {
             content.results.map(res =>
                 <BasicCard key={res.id} data={res} type={contentType}/>

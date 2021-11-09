@@ -11,16 +11,10 @@ function App({dispatch}) {
 
     fetch(charactersAPI)
         .then(res => res.json())
-        .then(res => {
-          // console.log(res)
-          dispatch(initiateCharactersList(res))
-        });
+        .then(res => dispatch(initiateCharactersList(res)));
     fetch(episodesAPI)
         .then(res => res.json())
-        .then(res => {
-          // console.log(res)
-          dispatch(initiateEpisodesList(res))
-        });
+        .then(res => dispatch(initiateEpisodesList(res)));
 
   },[])
 
