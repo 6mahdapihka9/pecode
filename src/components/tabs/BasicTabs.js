@@ -2,17 +2,8 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import TabPanel from "../tabPanel/TabPanel";
 
-function TabPanel({ children, value, index }) {
-
-  return (
-      <div hidden={value !== index}>
-        <Box sx={{ p: 3 }}>
-          <div>{children}</div>
-        </Box>
-      </div>
-  );
-}
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
@@ -29,12 +20,8 @@ export default function BasicTabs() {
             <Tab label="Episodes" />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
-          Item One
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
+        <TabPanel value={value} index={0} contentType={'characters'}/>
+        <TabPanel value={value} index={1} contentType={'episodes'}/>
       </Box>
   );
 }
