@@ -1,8 +1,16 @@
-export const initiateCharactersList = characters => ({
-  type: 'INIT_CHARACTERS_LIST',
+export const setCharactersList = characters => ({
+  type: 'SET_CHARACTERS_LIST',
   characters
 })
-export const initiateEpisodesList = episodes => ({
-  type: 'INIT_EPISODES_LIST',
+export const setEpisodesList = episodes => ({
+  type: 'SET_EPISODES_LIST',
   episodes
+})
+export const setCharactersInfo = charsInfo => ({
+  type: 'SET_CHARACTERS_INFO',
+  charsInfo
+})
+export const setEpisodesInfo = epsInfo => ({
+  type: 'SET_EPISODES_INFO',
+  epsInfo
 })
