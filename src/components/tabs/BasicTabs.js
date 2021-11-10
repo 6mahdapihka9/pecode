@@ -15,7 +15,7 @@ export default function BasicTabs() {
   return (
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange}>
+          <Tabs sx={{ pt: 3, pl: 3, pr: 3 }} value={value} onChange={handleChange}>
             <Tab label="Characters" />
             <Tab label="Episodes" />
           </Tabs>

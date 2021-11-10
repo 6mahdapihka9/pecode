@@ -11,9 +11,7 @@ import Pagination from '@mui/material/Pagination';
 
 function TabPanel({ value, index, dispatch, content, info, contentType }) {
   useEffect(()=>{
-
     fetchAPI(contentType, dispatch, (contentType === 'characters')? charactersAPI : episodesAPI)
-
   },[contentType, dispatch])
 
   const [page, setPage] = React.useState(1);

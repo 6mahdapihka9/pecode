@@ -49,11 +49,6 @@ export default function BasicCard({data, type}) {
     return (
         <Card sx={{ m:1.5, width: 300 }}>
           <CardContent>
-            {/*<CardMedia*/}
-            {/*    component="img"*/}
-            {/*    image={data.image}*/}
-            {/*    alt={data.name+' image'}*/}
-            {/*/>*/}
             <Typography variant="h5" component="div">
               {data.name}
             </Typography>
@@ -62,17 +57,7 @@ export default function BasicCard({data, type}) {
               <br/>
               Air date: {data.air_date}
             </Typography>
-            <Typography variant="body2">
-              {/*Species: {data.species}*/}
-              {/*<br />*/}
-              {/*Status: {data.status}*/}
-              {/*<br/>*/}
-              {/*Location: {data.location.name}*/}
-            </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="small">More</Button>
-          </CardActions>
         </Card>
     );
 }
