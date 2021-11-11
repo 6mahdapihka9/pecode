@@ -1,4 +1,11 @@
-import {setCharactersInfo, setCharactersList, setEpisodesInfo, setEpisodesList} from "../actions/actions";
+import {
+  setCharactersError,
+  setCharactersInfo,
+  setCharactersList,
+  setEpisodesError,
+  setEpisodesInfo,
+  setEpisodesList
+} from "../actions/actions";
 
 
 export default function fetchAPI(type, dispatch, url){
@@ -6,11 +13,21 @@ export default function fetchAPI(type, dispatch, url){
       .then(res => res.json())
       .then(res => {
         if (type === 'characters'){
-          dispatch(setCharactersList(res.results))
-          dispatch(setCharactersInfo(res.info))
+          if (res.error)
+            dispatch(setCharactersError(true))
+          else {
+            dispatch(setCharactersError(false))
+            dispatch(setCharactersList(res.results))
+            dispatch(setCharactersInfo(res.info))
+          }
         } else {
-          dispatch(setEpisodesList(res.results))
-          dispatch(setEpisodesInfo(res.info))
+          if (res.error)
+            dispatch(setEpisodesError(true))
+          else {
+            dispatch(setEpisodesError(false))
+            dispatch(setEpisodesList(res.results))
+            dispatch(setEpisodesInfo(res.info))
+          }
         }
       });
 }
