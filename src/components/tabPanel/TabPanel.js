@@ -32,7 +32,7 @@ function TabPanel({value, index, dispatch, content, info, error, contentType, fi
         <Box>
           <Filter filters={filters} setFilterString={setFilterString} handleChangePage={handleChangePage}/>
         </Box>
-        <Box sx={{p: 1, pr: 3, display: 'flex', flexFlow: 'wrap', justifyContent: 'end'}}>
+        <Box sx={{p: 1, pr: 5, display: 'flex', flexFlow: 'wrap', justifyContent: 'end'}}>
           {
             (info)?
                 <Box sx={{ ml: 3, mr: 3, display: 'flex',  alignItems: 'center' }}>
