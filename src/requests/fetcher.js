@@ -16,6 +16,7 @@ export default function fetchAPI(type, dispatch, url){
           if (res.error)
             dispatch(setCharactersError(true))
           else {
+            dispatch(setCharactersError(false))
             dispatch(setCharactersList(res.results))
             dispatch(setCharactersInfo(res.info))
           }
@@ -23,6 +24,7 @@ export default function fetchAPI(type, dispatch, url){
           if (res.error)
             dispatch(setEpisodesError(true))
           else {
+            dispatch(setEpisodesError(false))
             dispatch(setEpisodesList(res.results))
             dispatch(setEpisodesInfo(res.info))
           }
