@@ -43,8 +43,8 @@ function TabPanel({value, index, dispatch, content, info, error, contentType, fi
           }
         </Box>
         <Box sx={{p: 5, pb: 10, display: 'flex', justifyContent: 'end'}}>
-          <Pagination page={page}
-                      count={info.pages}
+          <Pagination page={(!error)? page : 1}
+                      count={(!error)? info.pages : 1}
                       onChange={handleChangePage}
                       showFirstButton
                       showLastButton/>
