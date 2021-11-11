@@ -1,17 +1,16 @@
 import React, {useEffect} from "react";
-import {connect} from "react-redux";
-import {charactersAPI, episodesAPI} from "../../requests/requests";
 import fetchAPI from "../../requests/fetcher";
 
-import BasicCard from "../basicCard/BasicCard";
 import Pagination from '@mui/material/Pagination';
 import Box from "@mui/material/Box";
 import {Filter} from "../filter/Filter";
+import EpisodesCard from "../episodesCard/EpisodesCard";
+import CharactersCard from "../charactersCard/CharactersCard";
 
 function TabPanel({value, index, dispatch, content, info, error, contentType, filters, API}) {
   useEffect(() => {
     fetchAPI(contentType, dispatch, API)
-  }, [contentType, dispatch])
+  }, [contentType, dispatch, API])
 
   const [page, setPage] = React.useState(1);
   const [filterString, setFilterString] = React.useState(``);
@@ -33,11 +32,27 @@ function TabPanel({value, index, dispatch, content, info, error, contentType, fi
         <Box>
           <Filter filters={filters} setFilterString={setFilterString} handleChangePage={handleChangePage}/>
         </Box>
+        <Box sx={{p: 1, pr: 5, display: 'flex', flexFlow: 'wrap', justifyContent: 'end'}}>
+          {
+            (info)?
+                <Box sx={{ ml: 3, mr: 3, display: 'flex',  alignItems: 'center' }}>
+                    {info.count +' '+contentType}
+                </Box>:
+                null
+          }
+          <Pagination page={(!error)? page : 1}
+                      count={(!error)? info.pages : 1}
+                      onChange={handleChangePage}
+                      showFirstButton
+                      showLastButton/>
+        </Box>
         <Box sx={{p: 3, display: "flex", flexFlow: 'wrap', justifyContent: 'space-around'}}>
           {
             (!error) ?
                 content.map(res =>
-                    <BasicCard key={res.id} data={res} type={contentType}/>
+                    (contentType === 'characters')?
+                        <CharactersCard key={res.id} data={res} /> :
+                        <EpisodesCard key={res.id} data={res} />
                 ) :
                 <Box>There is nothing here</Box>
           }
@@ -52,39 +67,4 @@ function TabPanel({value, index, dispatch, content, info, error, contentType, fi
       </div>
   );
 }
-
-const mapStateToProps = (state, ownProps) => (
-    (ownProps.contentType === 'characters') ?
-        {
-          content: state.charactersReducer,
-          info: state.charactersInfoReducer,
-          error: state.charactersErrorReducer,
-          API: charactersAPI,
-          filters: {
-            name: '',
-            status: ['alive', 'dead', 'unknown',''],
-            species: '',
-            type: '',
-            gender: ['female', 'male', 'genderless', 'unknown','']
-          }
-        } :
-        {
-          content: state.episodesReducer,
-          info: state.episodesInfoReducer,
-          error: state.episodesErrorReducer,
-          API: episodesAPI,
-          filters: {
-            name: '',
-            episode: ''
-          }
-        }
-)
-
-const mapDispatchToProps = dispatch => ({
-  dispatch
-})
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TabPanel)
+export default TabPanel

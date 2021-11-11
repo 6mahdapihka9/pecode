@@ -2,7 +2,7 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import TabPanel from "../tabPanel/TabPanel";
+import PanelMiddleware from "../tabPanel/PanelMiddleware";
 
 
 export default function BasicTabs() {
@@ -20,8 +20,8 @@ export default function BasicTabs() {
             <Tab label="Episodes" />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0} contentType={'characters'}/>
-        <TabPanel value={value} index={1} contentType={'episodes'}/>
+        <PanelMiddleware value={value} index={0} contentType={'characters'}/>
+        <PanelMiddleware value={value} index={1} contentType={'episodes'}/>
       </Box>
   );
 }
