@@ -28,7 +28,6 @@ export default function BasicModal({data, open, onClose}) {
   let [listOfEpisodes, setList] = useState([])
 
   useEffect(()=>{
-
     fetch(episodesAPI + data.episode.map(eps => eps.split('/')[eps.split('/').length-1]).join(','))
         .then(res => res.json())
         .then(res => {
@@ -37,7 +36,6 @@ export default function BasicModal({data, open, onClose}) {
           else
             setList([res])
         })
-
     return setList([])
   },[data.episode, open])
 

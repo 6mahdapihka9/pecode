@@ -55,7 +55,6 @@ export function Filter({filters, setFilterString, handleChangePage}) {
                   }
                 </Select>
               </FormControl>
-
               :
               <TextField id="outlined-basic"
                          sx={{width: 200, mr: 2}}
